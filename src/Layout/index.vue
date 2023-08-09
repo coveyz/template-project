@@ -1,7 +1,7 @@
-<script setup></script>
-
 <template>
-	<router-view />
+	<div>3232</div>
 </template>
+
+<script setup></script>
 
 <style lang="scss" scoped></style>
