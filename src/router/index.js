@@ -28,7 +28,7 @@ export const constantRoutes = [
 	},
 ];
 
-export const asyncRoutes = [];
+// export const asyncRoutes = [];
 
 const scrollBehavior = (_to, _form, savePosition) => {
 	if (savePosition) return savePosition;
