@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
-import noFoundCloudPng from '@/assets/404_image/404_cloud.png';
-import noFoundPng from '@/assets/404_image/404.png';
+import noFoundCloudPng from '@/assets/404_images/404_cloud.png';
+import noFoundPng from '@/assets/404_images/404.png';
 
 const noFoundCloud = ref(noFoundCloudPng);
 const noFound = ref(noFoundPng);
