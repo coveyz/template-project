@@ -6,8 +6,6 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     token: getToken(),
     name: '',
-    account: '', //todo delete
-    avatar: '',
     roles: [],
     permissions: [],
   }),
@@ -26,8 +24,6 @@ export const useUserStore = defineStore('user', {
             }
             this.permissions = res.data.permissions;
             this.name = user.name;
-            this.account = user.name;
-            this.account = user.account;
             resolve(res.data);
           })
           .catch((error) => {
@@ -35,6 +31,7 @@ export const useUserStore = defineStore('user', {
           });
       });
     },
+    /** 退出登录 */
     logout() {
       return new Promise((resolve) => {
         logout(this.token).then(res => {

@@ -35,7 +35,7 @@ const set = reactive({
 			<!-- navbar & tags-views -->
 			<div :class="{ 'fixed-header': set.fixedHeader }">
 				<navbar v-if="set.platform !== 'subapp' && set.platform !== 'subview'" />
-				<tagsView v-if="set.platform !== 'subview' && set.platform !== 'joymolib' && set.needTagsView" />
+				<tagsView v-if="set.platform !== 'subview' && set.needTagsView" />
 			</div>
 			<!-- app-main -->
 			<AppMain />
