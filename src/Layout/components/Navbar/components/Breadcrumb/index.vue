@@ -10,20 +10,18 @@ onMounted(() => {
 	getBreadcrumb();
 });
 
+/** 是否 首页 */
 const isDashboard = (route) => {
 	const name = route && route.name;
 	if (!name) return false;
-
 	return name.trim() === '首页';
 };
 
+/** 获取 面包屑数据 */
 const getBreadcrumb = () => {
-	console.log({ route, router });
-
 	let matched = route.matched.filter((item) => item.meta && item.meta.title);
-	// console.log('matched=>', matched);
 	const first = matched[0];
-
+  
 	if (!isDashboard(first)) {
 		matched = [{ path: '/index', meta: { title: '首页' } }].concat(matched);
 	}
@@ -31,6 +29,7 @@ const getBreadcrumb = () => {
 	levelList.value = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false);
 };
 
+/** 点击 跳转 */
 const handleLink = (item) => {
 	console.log('handleLink=>', item);
 	const { redirect, path } = item;

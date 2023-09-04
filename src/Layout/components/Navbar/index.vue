@@ -1,14 +1,47 @@
 <script setup>
-import { Hamburger, Breadcrumb } from './components';
+import { computed } from 'vue';
+import { ElMessageBox } from 'element-plus';
 import { useNav } from '@/Layout/hooks/useNav';
+import { useUserStore } from '@/store';
+import { Hamburger, Breadcrumb } from './components';
 
 const { app, toggleSideBar } = useNav();
+
+const userName = computed(() => {
+	return useUserStore().name;
+});
+
+/** 退出登录 */
+const logout = () => {
+	console.log('logout');
+	ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
+		confirmButtonText: '确定',
+		cancelButtonText: '取消',
+		type: 'warning',
+	}).then(async () => {
+		const result = await useUserStore().logout();
+		console.log('退出登录->>>>', result);
+		window.location.href = result.data;
+	});
+};
 </script>
 
 <template>
 	<div class="navbar">
 		<Hamburger id="hamburger-container" class="hamburger-container" :is-active="app.sidebar.opened" @toggleClick="toggleSideBar" />
 		<Breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+
+		<div class="right-menu">
+			<el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+				<div class="avatar-wrapper">
+					<div class="user-avatar">欢迎您: {{ userName }}</div>
+				</div>
+
+				<template #dropdown>
+					<el-dropdown-item @click="logout"> 退出登录 </el-dropdown-item>
+				</template>
+			</el-dropdown>
+		</div>
 	</div>
 </template>
 
@@ -19,6 +52,7 @@ const { app, toggleSideBar } = useNav();
 	position: relative;
 	background: #fff;
 	box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+	z-index: 1;
 
 	.hamburger-container {
 		line-height: 46px;
@@ -54,7 +88,7 @@ const { app, toggleSideBar } = useNav();
 		.right-menu-item {
 			display: inline-block;
 			padding: 0 8px;
-			height: 100%;
+			// height: 100%;
 			font-size: 18px;
 			color: #5a5e66;
 			vertical-align: text-bottom;
@@ -70,17 +104,19 @@ const { app, toggleSideBar } = useNav();
 		}
 
 		.avatar-container {
-			margin-right: 30px;
+			margin-right: 5px;
 
 			.avatar-wrapper {
-				margin-top: 5px;
 				position: relative;
+				font-size: 14px;
 
 				.user-avatar {
 					cursor: pointer;
-					width: 40px;
-					height: 40px;
-					border-radius: 10px;
+					max-width: 200px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					font-size: 14px;
 				}
 
 				.el-icon-caret-bottom {
