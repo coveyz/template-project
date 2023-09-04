@@ -9,5 +9,6 @@ export const setupStore = (app) => {
 export * from './modules/user'; //🥥 userModules
 export * from './modules/setting'; //🥥 settingsModules
 export * from './modules/permission'; //🥥 permissionModules
+export * from './modules/app'; //🥥 appModules
 
 export default store;

@@ -22,7 +22,7 @@ export const constantRoutes = [
 				path: 'index',
 				component: () => import('@/views/dashboard/index.vue'),
 				name: '首页',
-				meta: { title: '首页', noCache: true, affix: true },
+				meta: { title: '首页', noCache: false, affix: false },
 			},
 		],
 	},
