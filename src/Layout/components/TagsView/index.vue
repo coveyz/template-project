@@ -1,14 +1,23 @@
 <script setup>
 import { useTags } from '@/Layout/hooks/useTags';
+import { emitter, isEmpty, isEqual } from '@/utils';
 
 const { instance, route, router, multiTags, onMounted } = useTags();
 
 onMounted(() => {
 	if (!instance) return;
-
-  
-
+	/** 根据当前路由初始化操作标签页的禁用状态 */
+	showMenuModel(route.fullPath);
 });
+
+/** 检查当前右键的菜单两边是否存在别的菜单，如果左侧的菜单是顶级菜单，则不显示关闭左侧标签页，如果右侧没有菜单，则不显示关闭右侧标签页 */
+const showMenuModel = (currentPath, query = {}, refresh = false) => {
+	// console.log('currentPath=>', currentPath);
+	const allRoute = multiTags.value,
+		routeLength = multiTags.value.length;
+	console.log('allRoute=>', allRoute);
+
+};
 </script>
 
 <template>
