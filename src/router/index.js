@@ -3,51 +3,52 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Layout from '@/Layout/index.vue';
 
 export const constantRoutes = [
-	{
-		path: '/404',
-		component: () => import('@/views/error-page/404.vue'),
-		hidden: true,
-	},
-	{
-		path: '/401',
-		component: () => import('@/views/error-page/401.vue'),
-		hidden: true,
-	},
-	{
-		path: '',
-		component: Layout,
-		redirect: 'index',
-		children: [
-			{
-				path: 'index',
-				component: () => import('@/views/dashboard/index.vue'),
-				name: '首页',
-				meta: { title: '首页', noCache: false, affix: false },
-			},
-		],
-	},
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404.vue'),
+    hidden: true,
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401.vue'),
+    hidden: true,
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: 'index',
+    name: '首页',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/dashboard/index.vue'),
+        name: '首页',
+        meta: { title: '首页', affix: true },
+      },
+    ],
+  },
 ];
 
 // export const asyncRoutes = [];
 
 const scrollBehavior = (_to, _form, savePosition) => {
-	if (savePosition) return savePosition;
-	return { top: 0, left: 0 };
+  if (savePosition) return savePosition;
+  return { top: 0, left: 0 };
 };
 
 const routerFactory = () =>
-	createRouter({
-		scrollBehavior: scrollBehavior,
-		history: createWebHashHistory(),
-		routes: constantRoutes,
-	});
+  createRouter({
+    scrollBehavior: scrollBehavior,
+    history: createWebHashHistory(),
+    routes: constantRoutes,
+  });
 
 const router = routerFactory();
 
 /**  reset router */
 export const resetRouter = () => {
-	const newRouter = createRouter();
-	router.matcher = newRouter.matcher; // reset router
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
 };
 
 export default router;
