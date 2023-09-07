@@ -124,7 +124,7 @@ export const useTagsViewStore = defineStore('tagsViews', {
     },
     delOthersCachedViews(view) {
       return new Promise((resolve) => {
-        this.DEL_OTHERS_CACHED_VIEWS(view);
+        this.DEL_OTHERS_CACHED_VIEWS(view)
         resolve([...this.cachedViews])
       })
     },
